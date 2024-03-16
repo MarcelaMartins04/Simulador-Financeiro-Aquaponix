@@ -1,0 +1,130 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Simulador Financeiro Aquaponix </title>
+<style type="text/css" id="operaUserStyle"></style></head>
+
+<body>
+    <h1> SIMULADOR FINANCEIRO AQUAPONIX </h1> <br>
+
+    <b> Tanques </b> <br>
+    Quantidade de Tanques: <div><input type="number" id="input_qnt_tanques"></div>
+    Tipo de Tanque: <div><input type="text" id="input_tipo_tanques"></div>
+    <i><b> Tamanhos: Grande - 100.000L / Médio - 10.000L / Pequeno - 5.000L</b></i> <br>
+    <br>
+
+    <b> Peixes </b> <br>
+    Quantidade de peixes que serão utilizados: <div><input type="number" id="input_qnt_peixe"></div>
+    <i><b> Quantidades máximas de peixes para cada unidade de tanque: Grande - 1500 / Médio - 150 / Pequeno - 25
+        </b></i> <br>
+    Tipo de Peixes: <div><input type="text" id="input_tipo_peixe"></div>
+    <i><b> Espécies Disponíveis: Tilápia </b></i> <br>
+    <br>
+
+    <b>Plantas:</b> <br>
+    Estimativa de quantidade de plantas que serão plantadas? <div><input min="25" type="number" id="input_qnt_plantas">
+    </div>
+    Tipo de plantas: <div><input type="text" id="input_tipo_plantas"></div>
+    <i><b>Espécies de plantas disponíveis: Alface / Lavanda </b></i> <br>
+    Estimativa de Área (metro quadrado): <div><input type="text" id="input_area"></div>
+    <br>
+
+    <button onclick="calcular()">Calcular Estimativa de Valor do Sistema</button>
+    <br>
+    <br>
+
+    <div id="div_mensagem">
+    Seu <b> SISTEMA AQUAPONICO </b> com a quantidade de 10  tanques do tipo grande, ficou com um <b>preço total de tanques</b> igual a R$ 0, usando 0 Litros de água. <br>
+    Utilizando a quantidade de 2000 peixes sendo eles do tipo Tilápia, o <b> preço total gasto com os peixes </b> fica de R$0, sabendo que a unidade de peixe é igual a R$22. <br>
+    Para finalizar, utilizando 5000 plantas sendo elas do tipo Lavanda com uma área de 120 m², sabendo que cada planta cobre 5 m², o <b> preço total de plantas </b> é de R$10048. <br>
+    Sendo assim, o total a ser gasto no sistema é de R$ 10048. </div>
+
+
+
+
+
+<script>
+
+    function calcular() {
+
+        var qntTanques = Number(input_qnt_tanques.value);
+        var tipoTanques = input_tipo_tanques.value;
+
+        var valorTanques = Number(0);
+        var precoTotalTanque = Number(0);
+        var litrosPorTanque = Number(0);
+        var totalLitros = Number(0);
+
+        var qntPeixes = Number(input_qnt_peixe.value);
+        var tipoPeixes = input_tipo_peixe.value;
+        var precoPeixes = Number(0);
+
+        var qntPlantas = Number(input_qnt_plantas.value);
+        var tipoPlantas = input_tipo_plantas.value;
+        var precoPlantas = Number(0);
+        var areaPlantas = Number(input_area.value);
+
+
+
+        //Calcular o valor total de TANQUES conforme seu tipo e seu preço.
+
+        if (tipoTanques == "Grande") {
+            valorTanques = 40000
+            litrosPorTanque = 100000
+
+            precoTotalTanque = qntTanque * valorTanques
+            totalLitros = litrosPorTanque * qntTanque
+
+        }
+
+        if (tipoTanques == "Médio") {
+            valorTanques = 4000
+            litrosPorTanque = 10000
+
+            precoTotalTanque = qntTanque * valorTanques
+            totalLitros = litrosPorTanque * qntTanque
+
+        }
+
+        if (tipoTanques == "Pequeno") {
+            valorTanques = 2000
+            litrosPorTanque = 5000
+
+            precoTotalTanque = qntTanque * valorTanques
+            totalLitros = litrosPorTanque * qntTanque
+
+        }
+
+
+        // Calcular preço total de peixes 
+        // sabendo que a unidade de peixe é igual a 22 reais
+
+
+        if (tipoPeixes == "Tilápia") {
+            precoPeixes = qntPeixe * 22;
+
+        }
+
+        // Calcular preço das Plantas 
+
+        if (tipoPlantas == "Alface") {
+            // Cada unidade de sementes de alface custam é de 0,50 e cobrem 5 m²
+            precoPlantas = (qntPlantas * 0.5) + ((areaPlantas / 5) * 0.5);
+        } else if (tipoPlantas == "Lavanda") {
+            // Cada 70 sementes de lavanda custam é de 2 reais e cobrem 5 m²
+            precoPlantas = (qntPlantas * 2) + ((areaPlantas / 5) * 2);
+        }
+
+        // Calcular o custo total do sistema
+        var custoTotal = precoTotalTanque + precoPeixes + precoPlantas;
+
+        div_mensagem.innerHTML = `
+    Seu <b> SISTEMA AQUAPONICO </b> com a quantidade de ${qntTanques}  tanques do tipo ${tipoTanques}, ficou com um <b>preço total de tanques</b> igual a R$ ${precoTotalTanque}, usando ${totalLitros} Litros de água. <br>
+    Utilizando a quantidade de ${qntPeixes} peixes sendo eles do tipo Tilápia, o <b> preço total gasto com os peixes </b> fica de R$${precoPeixes}, sabendo que a unidade de peixe é igual a R$22. <br>
+    Para finalizar, utilizando ${qntPlantas} plantas sendo elas do tipo ${tipoPlantas} com uma área de ${areaPlantas} m², sabendo que cada planta cobre 5 m², o <b> preço total de plantas </b> é de R$${precoPlantas}. <br>
+    Sendo assim, o total a ser gasto no sistema é de R$ ${custoTotal}. `
+
+    }
+</script></body></html>
+
+
